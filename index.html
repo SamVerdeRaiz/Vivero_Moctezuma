@@ -1,0 +1,2507 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bitácora Vivero Moctezuma</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+background:#000;
+color:#fff;
+font-family:'Share Tech Mono',monospace;
+min-height:100vh;
+overflow-x:hidden;
+
+}
+
+body.text-gray-800{
+color:white!important;
+}
+
+.flex.min-h-screen{
+display:flex;
+min-height:100vh;
+}
+
+/* MENU */
+
+#menuBtn{
+
+position:fixed;
+top:14px;
+left:14px;
+
+width:46px;
+height:46px;
+
+background:black;
+
+border:1px solid #333;
+
+color:white;
+
+font-size:20px;
+
+cursor:pointer;
+
+border-radius:12px;
+
+z-index:3000;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+transition:.25s;
+
+}
+
+#menuBtn:hover{
+
+background:#111;
+border-color:white;
+
+}
+
+/* SIDEBAR */
+
+aside{
+
+position:fixed;
+
+top:0;
+left:0;
+
+height:100vh;
+
+width:240px;
+
+background:black!important;
+
+border-right:1px solid #222;
+
+padding:80px 18px 20px;
+
+overflow-y:auto;
+
+transition:.25s ease;
+
+z-index:2000;
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+}
+
+aside.cerrado{
+
+transform:translateX(-100%);
+
+}
+
+aside.abierto{
+
+transform:translateX(0);
+
+}
+
+aside h1{
+
+font-size:28px;
+
+letter-spacing:3px;
+
+font-weight:700;
+
+color:white;
+
+}
+
+aside button{
+
+background:black!important;
+
+border:1px solid #333;
+
+color:white;
+
+padding:14px;
+
+border-radius:14px;
+
+transition:.25s;
+
+font-size:14px;
+
+letter-spacing:1px;
+
+cursor:pointer;
+
+}
+
+aside button:hover{
+
+background:#111!important;
+
+border-color:white;
+
+}
+
+/* MAIN */
+
+main{
+
+width:100%;
+
+padding:18px;
+
+margin-left:240px;
+
+transition:.25s;
+
+display:block;
+
+min-height:auto;
+
+overflow-x:hidden;
+
+}
+main.expandido{
+
+margin-left:0;
+
+}
+
+/* TARJETAS */
+
+.card,
+.bg-white{
+
+background:#000!important;
+
+border:1px solid #222;
+
+border-radius:24px;
+
+box-shadow:none!important;
+
+transition:.25s;
+
+}
+
+.card:hover{
+
+border-color:#555;
+
+}
+
+/* INPUTS */
+
+input,
+textarea,
+select{
+
+width:100%;
+
+background:black!important;
+
+border:1px solid #222;
+
+color:white;
+
+padding:16px;
+
+border-radius:16px;
+
+outline:none;
+
+font-family:'Share Tech Mono',monospace;
+
+font-size:14px;
+
+transition:.2s;
+
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+
+border-color:white;
+
+}
+
+input::placeholder,
+textarea::placeholder{
+
+color:#777;
+
+}
+
+/* SELECT */
+
+#selectorPlanta{
+
+height:52px;
+
+overflow:hidden;
+
+}
+
+#selectorPlanta option{
+
+background:black;
+color:white;
+
+}
+
+/* BOTONES */
+
+button{
+
+font-family:'Share Tech Mono',monospace;
+
+}
+
+.bg-emerald-600,
+.bg-blue-600,
+.bg-orange-500,
+.bg-red-500,
+.bg-yellow-500,
+.bg-green-600{
+
+background:black!important;
+
+border:1px solid #444;
+
+color:white!important;
+
+transition:.2s;
+
+}
+
+.bg-emerald-600:hover,
+.bg-blue-600:hover,
+.bg-orange-500:hover,
+.bg-red-500:hover,
+.bg-yellow-500:hover,
+.bg-green-600:hover{
+
+background:#111!important;
+
+border-color:white;
+
+}
+
+/* TITULOS */
+
+h1,h2,h3{
+
+color:white!important;
+
+letter-spacing:2px;
+
+font-weight:700;
+
+}
+
+/* TEXTOS */
+
+.text-gray-500,
+.text-gray-600,
+.text-gray-800{
+
+color:#999!important;
+
+}
+
+/* CAJAS */
+
+.bg-blue-50,
+.bg-green-50,
+.bg-gray-100{
+
+background:#050505!important;
+
+border:1px solid #222;
+
+}
+
+/* DETAILS */
+
+summary{
+
+cursor:pointer;
+
+list-style:none;
+
+}
+
+summary::-webkit-details-marker{
+
+display:none;
+
+}
+
+/* SCROLL */
+
+::-webkit-scrollbar{
+
+width:6px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:black;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#333;
+
+border-radius:30px;
+
+}
+
+/* GRID */
+
+.grid{
+
+display:grid;
+
+gap:20px;
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.flex.min-h-screen{
+
+display:block;
+
+}
+
+aside{
+
+transform:translateX(-100%);
+
+width:240px;
+
+}
+
+aside.abierto{
+
+transform:translateX(0);
+
+}
+
+main{
+
+margin-left:0;
+
+padding:
+
+80px
+12px
+20px
+12px;
+
+gap:14px;
+
+}
+
+.grid{
+
+grid-template-columns:1fr!important;
+
+}
+
+input,
+textarea,
+select{
+
+font-size:16px;
+
+}
+
+button{
+
+font-size:14px;
+
+}
+
+}
+
+/* DESKTOP */
+
+@media(min-width:901px){
+
+.grid.lg\\:grid-cols-3{
+
+grid-template-columns:
+
+1fr
+1fr
+1fr;
+
+}
+
+.grid.lg\\:grid-cols-4{
+
+grid-template-columns:
+
+1fr
+1fr
+1fr
+1fr;
+
+}
+
+.lg\\:col-span-2{
+
+grid-column:span 2;
+
+}
+
+}
+dashboard{
+
+display:block;
+
+padding-top:0;
+
+width:100%;
+
+}
+
+
+main{
+
+margin-left:0;
+
+padding:
+80px
+12px
+20px
+12px;
+
+gap:14px;
+
+}
+
+}
+</style>
+
+
+</head>
+
+<body class="text-gray-800">
+
+<div class="flex min-h-screen">
+
+<!-- SIDEBAR -->
+<button id="menuBtn" onclick="toggleMenu()">
+
+☰
+
+</button>
+
+<aside class="
+w-full
+lg:w-72
+bg-white
+shadow-xl
+p-4
+space-y-3
+sticky
+top-0
+z-50
+">
+
+<h1 class="text-3xl font-bold text-emerald-700">
+🌿 Vivero
+</h1>
+
+<button
+onclick="mostrarSeccion('dashboard')"
+class="
+w-full
+p-3
+rounded-2xl
+bg-emerald-600
+text-white
+font-medium
+text-sm
+lg:text-base
+">
+🌱 Dashboard
+</button>
+<button
+onclick="mostrarSeccion('inventario')"
+class="
+w-full
+p-3
+rounded-2xl
+bg-emerald-600
+text-white
+font-medium
+text-sm
+lg:text-base
+">
+📦 Inventario
+</button>
+
+<button
+onclick="mostrarSeccion('herramientas'"
+class="
+w-full
+p-3
+rounded-2xl
+bg-emerald-600
+text-white
+font-medium
+text-sm
+lg:text-base
+">
+🧰 Herramientas
+</button>
+
+</aside>
+
+<!-- CONTENIDO -->
+
+<main class="flex-1 p-6">
+
+<!-- DASHBOARD -->
+
+<section
+id="dashboard"
+class="space-y-4">
+
+<div class="bg-white rounded-3xl shadow-xl p-5">
+
+<h1 class="text-4xl font-bold text-emerald-700">
+🌿 Bitácora Vivero Moctezuma
+</h1>
+
+<p class="text-gray-500 mt-2">
+Sistema profesional de control botánico
+</p>
+
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+<!-- PANEL -->
+
+<div class="bg-white rounded-3xl shadow-xl p-6 space-y-5">
+
+<h2 class="text-2xl font-bold text-emerald-700">
+➕ Agregar Planta
+</h2>
+
+<input
+id="nombre"
+type="text"
+placeholder="🌿 Nombre de planta"
+class="w-full p-4 rounded-2xl bg-gray-100"
+>
+<select
+id="selectorPlanta"
+onchange="seleccionarPlanta()"
+class="
+w-full
+px-4
+py-3
+rounded-xl
+bg-gray-100
+text-sm
+mt-2
+max-h-12
+focus:outline-none
+focus:ring-2
+focus:ring-emerald-400
+">
+
+<option value="">
+ Buscar planta registrada...
+</option>
+
+</select>
+
+<textarea
+id="comentario"
+rows="4"
+placeholder="📝 Comentario..."
+class="w-full p-4 rounded-2xl bg-gray-100"
+></textarea>
+
+<select
+id="tecnica"
+class="w-full p-4 rounded-2xl bg-gray-100">
+
+<option value="">
+ Técnica aplicada
+</option>
+
+<option>
+ Transplante
+</option>
+
+<option>
+ Esqueje
+</option>
+
+<option>
+ División por rizoma
+</option>
+
+<option>
+ Siembra por semilla
+</option>
+
+<option>
+ Acodo aéreo
+</option>
+
+<option>
+ Acodo terrestre
+</option>
+
+<option>
+ Injerto
+</option>
+
+<option>
+ Separación de hijuelos
+</option>
+
+<option>
+ División de mata
+</option>
+
+<option>
+ Estolones
+</option>
+
+<option>
+ División de bulbos
+</option>
+
+<option>
+ División de cormos
+</option>
+
+<option>
+ División de tubérculos
+</option>
+
+<option>
+ Cultivo in vitro
+</option>
+
+<option>
+ Poda sanitaria
+</option>
+
+<option>
+ Poda formación
+</option>
+
+<option>
+ Fertilización
+</option>
+
+<option>
+ Cambio de riego
+</option>
+
+<option>
+ Cambio de sustrato
+</option>
+
+<option>
+ Control plagas
+</option>
+
+<option>
+ Tratamiento hongos
+</option>
+
+<option>
+ Cambio ubicación
+</option>
+
+<option>
+ Aplicación química
+</option>
+
+<option>
+ Mantenimiento general
+</option>
+
+</select>
+
+<button
+onclick="guardarPlanta()"
+class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-4 rounded-2xl">
+
+Guardar Planta
+
+</button>
+
+<hr>
+
+<h2 class="text-2xl font-bold text-blue-700">
+📝 Actividad
+</h2>
+
+<input
+id="actividad"
+type="text"
+placeholder="📌 Ej: podar limones"
+class="w-full p-4 rounded-2xl bg-gray-100"
+>
+
+<button
+onclick="guardarActividad()"
+class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl">
+
+Guardar Actividad
+
+</button>
+
+</div>
+
+<!-- REGISTRO -->
+
+<div class="lg:col-span-2 space-y-6">
+
+<div class="bg-white rounded-3xl shadow-xl p-6">
+
+<div class="flex justify-between items-center mb-6">
+
+<h2 class="text-3xl font-bold text-emerald-700">
+🌱 Registro Botánico
+</h2>
+
+<input
+id="busqueda"
+type="text"
+placeholder="🔎 Buscar planta"
+onkeyup="renderizar()"
+class="p-4 rounded-2xl bg-gray-100"
+>
+
+</div>
+
+<div id="lista" class="space-y-4"></div>
+
+</div>
+
+<div class="bg-white rounded-3xl shadow-xl p-6">
+
+<h2 class="text-3xl font-bold text-blue-700 mb-5">
+🗓️ Actividades
+</h2>
+
+<div id="listaActividades" class="space-y-4"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- INVENTARIO -->
+
+
+<section id="inventario" class="hidden">
+
+<div class="bg-white rounded-3xl shadow-xl p-6">
+
+<h1 class="text-4xl font-bold text-blue-700 mb-6">
+📦 Inventario
+</h1>
+
+<div class="grid lg:grid-cols-4 gap-4 mb-6">
+
+<input
+id="invNombre"
+placeholder="Producto"
+class="p-4 rounded-2xl bg-gray-100"
+>
+
+<input
+id="invCantidad"
+type="number"
+placeholder="Cantidad"
+class="p-4 rounded-2xl bg-gray-100"
+>
+
+<select
+id="invCategoria"
+class="p-4 rounded-2xl bg-gray-100">
+
+<option value="">
+Categoría
+</option>
+
+<option>🪴 Macetas</option>
+<option>🌱 Plantas</option>
+<option>🧪 Fertilizantes</option>
+<option>🌿 Sustratos</option>
+<option>🌾 Semillas</option>
+<option>🪨 Piedra decorativa</option>
+<option>💧 Riego</option>
+<option>🏷️ Etiquetas</option>
+<option>🍋 Frutales</option>
+<option>🌸 Ornamentales</option>
+<option>📦 Empaque</option>
+
+</select>
+
+<button
+onclick="guardarInventario()"
+class="bg-blue-600 text-white rounded-2xl">
+
+Guardar
+
+</button>
+
+</div>
+
+<div
+id="listaInventario"
+class="space-y-5">
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- HERRAMIENTAS -->
+
+<section id="herramientas" class="hidden">
+
+<div class="bg-white rounded-3xl shadow-xl p-6">
+
+<h1 class="text-4xl font-bold text-orange-500 mb-4">
+🧰 Herramientas
+</h1>
+
+<p class="text-gray-600">
+Sección futura para:
+</p>
+
+<ul class="mt-4 space-y-3 text-lg">
+
+<li>✂️ Tijeras</li>
+<li>⛏️ Palas</li>
+<li>💧 Sistemas de riego</li>
+<li>🪣 Sustratos</li>
+<li>🧴 Productos químicos</li>
+
+</ul>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+<script>
+const basePlantas = {
+
+aspidistra:{
+sustrato:"Tierra rica y drenante",
+humedad:"Media",
+luz:"Sombra o semisombra",
+fertilizante:"Orgánico suave",
+riego:"Moderado",
+temperatura:"10-30°C"
+},
+
+monstera:{
+sustrato:"Fibra de coco + perlita + corteza",
+humedad:"Alta",
+luz:"Indirecta brillante",
+fertilizante:"NPK balanceado",
+riego:"2 veces por semana",
+temperatura:"18-30°C"
+},
+
+cymbidium:{
+sustrato:"Corteza de pino + perlita",
+humedad:"Media-Alta",
+luz:"Muy brillante indirecta",
+fertilizante:"Orquídeas",
+riego:"Moderado",
+temperatura:"10-25°C"
+},
+
+phalaenopsis:{
+sustrato:"Corteza de pino",
+humedad:"Alta",
+luz:"Indirecta suave",
+fertilizante:"Especial orquídeas",
+riego:"Ligero",
+temperatura:"18-28°C"
+},
+
+dendrobium:{
+sustrato:"Corteza aireada",
+humedad:"Media",
+luz:"Brillante indirecta",
+fertilizante:"Orquídeas",
+riego:"Moderado",
+temperatura:"15-30°C"
+},
+
+anturio:{
+sustrato:"Fibroso drenante",
+humedad:"Alta",
+luz:"Indirecta brillante",
+fertilizante:"Floración",
+riego:"Moderado",
+temperatura:"18-30°C"
+},
+
+helecho:{
+sustrato:"Orgánico húmedo",
+humedad:"Muy alta",
+luz:"Sombra",
+fertilizante:"Nitrógeno suave",
+riego:"Frecuente",
+temperatura:"15-28°C"
+},
+
+helechoBoston:{
+sustrato:"Orgánico húmedo",
+humedad:"Alta",
+luz:"Indirecta",
+fertilizante:"Follaje",
+riego:"Frecuente",
+temperatura:"15-28°C"
+},
+
+pataDeElefante:{
+sustrato:"Muy drenante",
+humedad:"Baja",
+luz:"Sol o mucha luz",
+fertilizante:"Suculentas",
+riego:"Escaso",
+temperatura:"15-35°C"
+},
+
+ficus:{
+sustrato:"Universal drenante",
+humedad:"Media",
+luz:"Indirecta brillante",
+fertilizante:"Verde follaje",
+riego:"Moderado",
+temperatura:"18-30°C"
+},
+
+ficusLyrata:{
+sustrato:"Drenante orgánico",
+humedad:"Media",
+luz:"Indirecta brillante",
+fertilizante:"Follaje",
+riego:"Moderado",
+temperatura:"18-30°C"
+},
+
+palmaAreca:{
+sustrato:"Orgánico drenante",
+humedad:"Alta",
+luz:"Indirecta brillante",
+fertilizante:"Palmeras",
+riego:"Moderado",
+temperatura:"18-32°C"
+},
+
+palmaAbanico:{
+sustrato:"Drenante",
+humedad:"Media",
+luz:"Sol parcial",
+fertilizante:"Palmeras",
+riego:"Moderado",
+temperatura:"15-35°C"
+},
+
+dracena:{
+sustrato:"Universal ligero",
+humedad:"Media",
+luz:"Indirecta",
+fertilizante:"Follaje",
+riego:"Moderado",
+temperatura:"18-30°C"
+},
+
+troncoBrasil:{
+sustrato:"Universal ligero",
+humedad:"Media",
+luz:"Indirecta",
+fertilizante:"Follaje",
+riego:"Moderado",
+temperatura:"18-30°C"
+},
+
+lenguaDeSuegra:{
+sustrato:"Muy drenante",
+humedad:"Baja",
+luz:"Sombra o sol",
+fertilizante:"Suculentas",
+riego:"Escaso",
+temperatura:"15-35°C"
+},
+
+potus:{
+sustrato:"Universal ligero",
+humedad:"Media",
+luz:"Indirecta",
+fertilizante:"Follaje",
+riego:"Moderado",
+temperatura:"18-30°C"
+},
+
+syngonium:{
+sustrato:"Ligero drenante",
+humedad:"Alta",
+luz:"Indirecta",
+fertilizante:"Follaje",
+riego:"Moderado",
+temperatura:"18-30°C"
+},
+
+calathea:{
+sustrato:"Orgánico húmedo",
+humedad:"Muy alta",
+luz:"Indirecta suave",
+fertilizante:"Orgánico",
+riego:"Frecuente",
+temperatura:"18-28°C"
+},
+
+maranta:{
+sustrato:"Orgánico húmedo",
+humedad:"Alta",
+luz:"Indirecta",
+fertilizante:"Orgánico",
+riego:"Moderado",
+temperatura:"18-28°C"
+},
+
+begonia:{
+sustrato:"Orgánico drenante",
+humedad:"Alta",
+luz:"Indirecta brillante",
+fertilizante:"Floración",
+riego:"Moderado",
+temperatura:"18-28°C"
+},
+
+lavanda:{
+sustrato:"Arenoso drenante",
+humedad:"Baja",
+luz:"Sol directo",
+fertilizante:"Bajo nitrógeno",
+riego:"Escaso",
+temperatura:"10-35°C"
+},
+
+romero:{
+sustrato:"Arenoso",
+humedad:"Baja",
+luz:"Sol directo",
+fertilizante:"Orgánico ligero",
+riego:"Moderado",
+temperatura:"10-35°C"
+},
+
+tomillo:{
+sustrato:"Arenoso drenante",
+humedad:"Baja",
+luz:"Sol directo",
+fertilizante:"Ligero",
+riego:"Escaso",
+temperatura:"10-35°C"
+},
+
+oregano:{
+sustrato:"Drenante",
+humedad:"Media-Baja",
+luz:"Sol directo",
+fertilizante:"Orgánico",
+riego:"Moderado",
+temperatura:"15-35°C"
+},
+
+albahaca:{
+sustrato:"Fértil húmedo",
+humedad:"Media-Alta",
+luz:"Sol parcial",
+fertilizante:"Orgánico",
+riego:"Frecuente",
+temperatura:"18-32°C"
+},
+
+menta:{
+sustrato:"Húmedo fértil",
+humedad:"Alta",
+luz:"Semisombra",
+fertilizante:"Orgánico",
+riego:"Frecuente",
+temperatura:"15-30°C"
+},
+
+hierbabuena:{
+sustrato:"Fértil húmedo",
+humedad:"Alta",
+luz:"Semisombra",
+fertilizante:"Orgánico",
+riego:"Frecuente",
+temperatura:"15-30°C"
+},
+
+salviaGreggii:{
+sustrato:"Drenante",
+humedad:"Baja",
+luz:"Sol directo",
+fertilizante:"Ligero",
+riego:"Moderado",
+temperatura:"10-35°C"
+},
+
+salviaLeucantha:{
+sustrato:"Fértil drenante",
+humedad:"Media",
+luz:"Sol parcial",
+fertilizante:"Orgánico",
+riego:"Moderado",
+temperatura:"12-30°C"
+},
+
+salviaMexicana:{
+sustrato:"Fértil drenante",
+humedad:"Media",
+luz:"Sol parcial",
+fertilizante:"Orgánico",
+riego:"Moderado",
+temperatura:"12-30°C"
+},
+
+duranta:{
+sustrato:"Universal drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"NPK balanceado",
+riego:"Moderado",
+temperatura:"15-35°C"
+},
+
+cineraria:{
+sustrato:"Orgánico húmedo",
+humedad:"Alta",
+luz:"Indirecta brillante",
+fertilizante:"Floración",
+riego:"Frecuente",
+temperatura:"12-24°C"
+},
+
+amarantoFalso:{
+sustrato:"Fértil drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Orgánico",
+riego:"Moderado",
+temperatura:"18-35°C"
+},
+
+bugambilia:{
+sustrato:"Muy drenante",
+humedad:"Baja",
+luz:"Sol directo",
+fertilizante:"Alto fósforo",
+riego:"Escaso",
+temperatura:"20-35°C"
+},
+
+gardenia:{
+sustrato:"Ácido drenante",
+humedad:"Alta",
+luz:"Semisombra",
+fertilizante:"Acidófilas",
+riego:"Frecuente",
+temperatura:"15-28°C"
+},
+
+azalea:{
+sustrato:"Ácido orgánico",
+humedad:"Alta",
+luz:"Semisombra",
+fertilizante:"Acidófilas",
+riego:"Frecuente",
+temperatura:"10-24°C"
+},
+
+camelina:{
+sustrato:"Fértil drenante",
+humedad:"Media",
+luz:"Sol parcial",
+fertilizante:"Orgánico",
+riego:"Moderado",
+temperatura:"10-28°C"
+},
+
+bambu:{
+sustrato:"Fértil húmedo",
+humedad:"Alta",
+luz:"Sol parcial",
+fertilizante:"Nitrógeno",
+riego:"Frecuente",
+temperatura:"15-35°C"
+},
+
+limon:{
+sustrato:"Fértil drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Cítricos",
+riego:"Regular",
+temperatura:"15-35°C"
+},
+
+naranja:{
+sustrato:"Fértil drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Cítricos",
+riego:"Regular",
+temperatura:"15-35°C"
+},
+
+mandarina:{
+sustrato:"Fértil drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Cítricos",
+riego:"Regular",
+temperatura:"15-35°C"
+},
+
+toronja:{
+sustrato:"Fértil drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Cítricos",
+riego:"Regular",
+temperatura:"15-35°C"
+},
+
+lima:{
+sustrato:"Fértil drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Cítricos",
+riego:"Moderado",
+temperatura:"15-35°C"
+},
+
+aguacate:{
+sustrato:"Profundo drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Alto nitrógeno",
+riego:"Moderado",
+temperatura:"15-30°C"
+},
+
+durazno:{
+sustrato:"Franco drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Frutales",
+riego:"Moderado",
+temperatura:"5-30°C"
+},
+
+ciruelo:{
+sustrato:"Franco drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Frutales",
+riego:"Moderado",
+temperatura:"5-30°C"
+},
+
+pera:{
+sustrato:"Franco fértil",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Frutales",
+riego:"Moderado",
+temperatura:"5-28°C"
+},
+
+manzano:{
+sustrato:"Franco fértil",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Frutales",
+riego:"Moderado",
+temperatura:"5-25°C"
+},
+
+tejocote:{
+sustrato:"Franco drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Orgánico",
+riego:"Moderado",
+temperatura:"5-28°C"
+},
+
+guayaba:{
+sustrato:"Fértil drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Frutales",
+riego:"Moderado",
+temperatura:"18-35°C"
+},
+
+granada:{
+sustrato:"Drenante",
+humedad:"Baja-Media",
+luz:"Sol directo",
+fertilizante:"Frutales",
+riego:"Moderado",
+temperatura:"10-35°C"
+},
+
+higo:{
+sustrato:"Drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Orgánico",
+riego:"Moderado",
+temperatura:"10-35°C"
+},
+
+maracuya:{
+sustrato:"Fértil drenante",
+humedad:"Alta",
+luz:"Sol parcial",
+fertilizante:"Floración",
+riego:"Frecuente",
+temperatura:"18-32°C"
+},
+
+colorin:{
+sustrato:"Drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Orgánico",
+riego:"Moderado",
+temperatura:"15-35°C"
+},
+
+jacaranda:{
+sustrato:"Franco drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Orgánico",
+riego:"Moderado",
+temperatura:"10-35°C"
+},
+
+trueno:{
+sustrato:"Universal drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"NPK balanceado",
+riego:"Moderado",
+temperatura:"10-35°C"
+},
+
+eugenia:{
+sustrato:"Fértil drenante",
+humedad:"Media",
+luz:"Sol parcial",
+fertilizante:"Orgánico",
+riego:"Moderado",
+temperatura:"15-30°C"
+},
+
+viburnum:{
+sustrato:"Orgánico drenante",
+humedad:"Media",
+luz:"Sol parcial",
+fertilizante:"Orgánico",
+riego:"Moderado",
+temperatura:"10-30°C"
+},
+
+hiedra:{
+sustrato:"Universal ligero",
+humedad:"Media",
+luz:"Semisombra",
+fertilizante:"Follaje",
+riego:"Moderado",
+temperatura:"10-28°C"
+},
+
+ficusBenjamina:{
+sustrato:"Universal drenante",
+humedad:"Media",
+luz:"Indirecta brillante",
+fertilizante:"Follaje",
+riego:"Moderado",
+temperatura:"18-30°C"
+},
+
+ficusPandurata:{
+sustrato:"Orgánico drenante",
+humedad:"Media",
+luz:"Indirecta brillante",
+fertilizante:"Follaje",
+riego:"Moderado",
+temperatura:"18-30°C"
+},
+
+palmeraWashingtonia:{
+sustrato:"Drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Palmeras",
+riego:"Moderado",
+temperatura:"10-40°C"
+},
+
+cedroLimon:{
+sustrato:"Fértil drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Orgánico",
+riego:"Moderado",
+temperatura:"15-35°C"
+},
+
+aralia:{
+sustrato:"Ligero drenante",
+humedad:"Alta",
+luz:"Indirecta",
+fertilizante:"Follaje",
+riego:"Moderado",
+temperatura:"18-30°C"
+},
+
+croto:{
+sustrato:"Orgánico drenante",
+humedad:"Alta",
+luz:"Brillante",
+fertilizante:"Follaje",
+riego:"Moderado",
+temperatura:"18-32°C"
+},
+
+petunia:{
+sustrato:"Fértil drenante",
+humedad:"Media",
+luz:"Sol parcial",
+fertilizante:"Floración",
+riego:"Frecuente",
+temperatura:"12-30°C"
+},
+
+geranio:{
+sustrato:"Drenante",
+humedad:"Media-Baja",
+luz:"Sol directo",
+fertilizante:"Floración",
+riego:"Moderado",
+temperatura:"10-30°C"
+},
+
+clavel:{
+sustrato:"Franco drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Floración",
+riego:"Moderado",
+temperatura:"10-28°C"
+},
+
+rosa:{
+sustrato:"Fértil drenante",
+humedad:"Media",
+luz:"Sol directo",
+fertilizante:"Rosas",
+riego:"Moderado",
+temperatura:"10-28°C"
+},
+
+nochebuena:{
+sustrato:"Orgánico drenante",
+humedad:"Media",
+luz:"Indirecta brillante",
+fertilizante:"Floración",
+riego:"Moderado",
+temperatura:"18-28°C"
+}
+
+};
+let plantas =
+JSON.parse(localStorage.getItem("plantas")) || [];
+
+let actividades =
+JSON.parse(localStorage.getItem("actividades")) || [];
+
+let inventario =
+JSON.parse(localStorage.getItem("inventario")) || [];
+
+function mostrarSeccion(id){
+
+document
+.querySelectorAll("main section")
+.forEach(sec=>{
+
+sec.classList.add("hidden");
+
+});
+
+document
+.getElementById(id)
+.classList.remove("hidden");
+
+}
+function toggleMenu(){
+
+const sidebar =
+document.querySelector("aside");
+
+const main =
+document.querySelector("main");
+
+sidebar.classList.toggle("cerrado");
+
+main.classList.toggle("expandido");
+
+}
+
+
+
+function obtenerInfo(nombre){
+
+const texto = nombre
+.toLowerCase()
+.replace(/\s/g,'');
+
+for(let clave in basePlantas){
+
+const claveNormalizada =
+clave.toLowerCase();
+
+if(
+texto.includes(claveNormalizada)
+||
+claveNormalizada.includes(texto)
+){
+return basePlantas[clave];
+}
+
+}
+
+return{
+
+sustrato:"Sin registro",
+humedad:"Sin registro",
+luz:"Sin registro",
+fertilizante:"Sin registro",
+riego:"Sin registro",
+temperatura:"Sin registro"
+
+};
+
+function seleccionarPlanta(){
+
+const selector =
+document.getElementById("selectorPlanta");
+
+const input =
+document.getElementById("nombre");
+
+if(!selector.value)return;
+
+input.value=
+selector.value
+.replace(/([A-Z])/g," $1")
+.replace(/^./,c=>c.toUpperCase());
+
+}
+
+}function guardarPlanta(){
+
+const nombre=
+document
+.getElementById("nombre")
+.value
+.trim();
+
+const comentario=
+document
+.getElementById("comentario")
+.value
+.trim();
+
+const tecnica=
+document
+.getElementById("tecnica")
+.value
+.trim();
+
+if(nombre===""){
+
+alert("Ingresa una planta");
+
+return;
+
+}
+
+const info=
+obtenerInfo(nombre);
+
+const planta={
+
+nombre,
+
+comentario,
+
+tecnica:
+
+tecnica||"Sin técnica registrada",
+
+fecha:
+new Date()
+.toLocaleDateString(),
+
+bloqueado:false,
+
+...info
+
+};
+
+plantas.push(planta);
+
+localStorage.setItem(
+
+"plantas",
+
+JSON.stringify(
+plantas
+)
+
+);
+
+document
+.getElementById("nombre")
+.value="";
+
+document
+.getElementById("comentario")
+.value="";
+
+document
+.getElementById("tecnica")
+.value="";
+
+renderizar();
+
+
+}
+
+function cargarListaPlantas(){
+
+const selector =
+document.getElementById("selectorPlanta");
+
+if(!selector)return;
+
+selector.innerHTML=`
+<option value="">
+🌿 Buscar planta registrada...
+</option>
+`;
+
+Object.keys(basePlantas)
+.sort()
+.forEach(nombre=>{
+
+const opcion =
+document.createElement("option");
+
+opcion.value=nombre;
+
+opcion.textContent=
+nombre
+.replace(/([A-Z])/g," $1")
+.replace(/^./,c=>c.toUpperCase());
+
+selector.appendChild(opcion);
+
+});
+
+}
+
+function guardarActividad(){
+
+const input =
+document.getElementById("actividad");
+
+const actividad =
+input.value.trim();
+
+if(!actividad){
+
+alert("Escribe una actividad");
+
+return;
+
+}
+
+actividades.push({
+
+texto:actividad,
+
+fecha:new Date().toLocaleDateString("es-MX"),
+realizada:false
+
+});
+
+localStorage.setItem(
+
+"actividades",
+
+JSON.stringify(
+actividades
+)
+
+);
+
+input.value="";
+
+renderizarActividades();
+
+}
+
+function eliminar(index){
+
+plantas.splice(index,1);
+
+localStorage.setItem(
+"plantas",
+JSON.stringify(plantas)
+);
+
+renderizar();
+
+}
+function renderizar(){
+
+const lista =
+document.getElementById("lista");
+
+lista.innerHTML="";
+
+const busqueda =
+document.getElementById("busqueda")
+.value
+.toLowerCase();
+
+const agrupadas = {};
+
+plantas.forEach((planta,index)=>{
+
+if(
+!planta.nombre
+.toLowerCase()
+.includes(busqueda)
+){
+return;
+}
+
+if(!agrupadas[planta.fecha]){
+agrupadas[planta.fecha]=[];
+}
+
+agrupadas[planta.fecha].push({
+...planta,
+index
+});
+
+});
+
+for(let fecha in agrupadas){
+
+lista.innerHTML += `
+
+<details open class="bg-white rounded-3xl shadow-xl p-5">
+
+<summary class="text-2xl font-bold text-emerald-700 cursor-pointer">
+
+📅 ${fecha}
+(${agrupadas[fecha].length})
+
+</summary>
+
+<div class="mt-5 space-y-4">
+
+${agrupadas[fecha].map(planta=>`
+
+<details class="bg-green-50 rounded-3xl p-4 card">
+
+<summary class="cursor-pointer text-2xl font-bold text-gray-800 flex justify-between items-center">
+
+<span>
+🌱 ${planta.nombre}
+</span>
+
+<span>
+${planta.bloqueado ? '🔒' : '🔓'}
+</span>
+
+</summary>
+
+<div class="mt-4 space-y-2">
+
+<p>🪴 <b>Sustrato:</b> ${planta.sustrato}</p>
+
+<p>💧 <b>Humedad:</b> ${planta.humedad}</p>
+
+<p>☀️ <b>Luz:</b> ${planta.luz}</p>
+
+<p>🧪 <b>Fertilizante:</b> ${planta.fertilizante}</p>
+
+<p>🚿 <b>Riego:</b> ${planta.riego}</p>
+
+<p>🌡️ <b>Temperatura:</b> ${planta.temperatura}</p>
+
+<p>💬 <b>Comentario:</b> ${planta.comentario}</p>
+<p>
+🌱 <b>Técnica:</b>
+${planta.tecnica || "Sin registro"}
+</p>
+
+
+<div class="flex flex-wrap gap-3 pt-4">
+
+<button
+onclick="editar(${planta.index})"
+class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-xl"
+${planta.bloqueado ? 'disabled' : ''}>
+
+✏️ Editar
+
+</button>
+
+<button
+onclick="toggleBloqueo(${planta.index})"
+class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl">
+
+${planta.bloqueado ? '🔓 Desbloquear' : '🔒 Bloquear'}
+
+</button>
+
+<button
+onclick="eliminar(${planta.index})"
+class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl"
+${planta.bloqueado ? 'disabled' : ''}>
+
+🗑️ Eliminar
+
+</button>
+
+</div>
+
+</div>
+
+</details>
+
+`).join("")}
+
+</div>
+
+</details>
+
+`;
+
+}
+
+}function toggleBloqueo(index){
+
+plantas[index].bloqueado =
+!plantas[index].bloqueado;
+
+localStorage.setItem(
+"plantas",
+JSON.stringify(plantas)
+);
+
+renderizar();
+
+}
+
+function editar(index){
+
+if(plantas[index].bloqueado){
+return;
+}
+
+const planta = plantas[index];
+
+const nuevoNombre = prompt(
+"🌱 Nombre:",
+planta.nombre
+);
+
+if(nuevoNombre===null)return;
+
+const nuevoSustrato = prompt(
+"🪴 Sustrato:",
+planta.sustrato
+);
+
+if(nuevoSustrato===null)return;
+
+const nuevaHumedad = prompt(
+"💧 Humedad:",
+planta.humedad
+);
+
+if(nuevaHumedad===null)return;
+
+const nuevaLuz = prompt(
+"☀️ Luz:",
+planta.luz
+);
+
+if(nuevaLuz===null)return;
+
+const nuevoFertilizante = prompt(
+"🧪 Fertilizante:",
+planta.fertilizante
+);
+
+if(nuevoFertilizante===null)return;
+
+const nuevoRiego = prompt(
+"🚿 Riego:",
+planta.riego
+);
+
+if(nuevoRiego===null)return;
+
+const nuevaTemperatura = prompt(
+"🌡️ Temperatura:",
+planta.temperatura
+);
+
+if(nuevaTemperatura===null)return;
+
+const nuevoComentario = prompt(
+"💬 Comentario:",
+planta.comentario
+);
+
+if(nuevoComentario===null)return;
+const nuevaTecnica = prompt(
+"🌱 Técnica:",
+planta.tecnica || ""
+);
+
+if(nuevaTecnica===null)return;
+
+plantas[index]={
+
+...planta,
+
+nombre:nuevoNombre,
+sustrato:nuevoSustrato,
+humedad:nuevaHumedad,
+luz:nuevaLuz,
+fertilizante:nuevoFertilizante,
+riego:nuevoRiego,
+temperatura:nuevaTemperatura,
+comentario:nuevoComentario,
+tecnica:nuevaTecnica
+
+};
+
+if(nuevaTecnica===null)return;
+
+
+localStorage.setItem(
+"plantas",
+JSON.stringify(plantas)
+);
+
+renderizar();
+
+}
+renderizar();
+
+function editarActividad(index){
+
+const nueva=prompt("Editar actividad:",actividades[index].texto);
+
+if(nueva===null)return;
+
+const limpia=nueva.trim();
+
+if(!limpia)return;
+
+actividades[index].texto=limpia;
+
+localStorage.setItem("actividades",JSON.stringify(actividades));
+
+renderizarActividades();
+
+}
+
+function eliminarActividad(index){
+
+actividades.splice(index,1);
+
+localStorage.setItem("actividades",JSON.stringify(actividades));
+
+renderizarActividades();
+
+}
+
+function toggleActividad(index){
+
+actividades[index].realizada=!actividades[index].realizada;
+
+localStorage.setItem("actividades",JSON.stringify(actividades));
+
+renderizarActividades();
+
+}
+
+function renderizarActividades(){
+
+const lista=document.getElementById("listaActividades");
+
+lista.innerHTML="";
+
+const agrupadas={};
+
+actividades.forEach((actividad,index)=>{
+
+if(!actividad.realizada){
+actividad.realizada=false;
+}
+
+if(!agrupadas[actividad.fecha]){
+agrupadas[actividad.fecha]=[];
+}
+
+agrupadas[actividad.fecha].push({...actividad,index});
+
+});
+
+for(let fecha in agrupadas){
+
+lista.innerHTML+=`
+
+<details open class="bg-white rounded-3xl shadow-xl p-5">
+
+<summary class="font-bold text-blue-700">
+
+📅 ${fecha} (${agrupadas[fecha].length})
+
+</summary>
+
+<div class="space-y-3 mt-4">
+
+${agrupadas[fecha].map(act=>`
+
+<div class="bg-blue-50 rounded-2xl p-4 shadow">
+
+<div class="flex justify-between gap-2 flex-wrap">
+
+<p class="${act.realizada?'line-through opacity-50':''}">
+
+${act.realizada?'✅':'📌'}
+
+${act.texto}
+
+</p>
+
+<div class="flex gap-2">
+
+<button onclick="toggleActividad(${act.index})" class="bg-green-600 text-white px-3 py-1 rounded-xl">
+
+${act.realizada?'↩️':'✔'}
+
+</button>
+
+<button onclick="editarActividad(${act.index})" class="bg-yellow-500 text-white px-3 py-1 rounded-xl">
+
+✏️
+
+</button>
+
+<button onclick="eliminarActividad(${act.index})" class="bg-red-500 text-white px-3 py-1 rounded-xl">
+
+🗑️
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`).join("")}
+
+</div>
+
+</details>
+
+`;
+}
+
+}
+function guardarInventario(){
+
+const nombre =
+document
+.getElementById("invNombre")
+.value
+.trim();
+
+const cantidad =
+parseInt(
+document
+.getElementById("invCantidad")
+.value
+) || 0;
+
+const categoria =
+document
+.getElementById("invCategoria")
+.value
+.trim();
+
+if(!nombre){
+
+alert("Escribe producto");
+
+return;
+
+}
+
+const existente =
+inventario.findIndex(
+item =>
+item.nombre.toLowerCase() === nombre.toLowerCase()
+);
+
+if(existente >= 0){
+
+inventario[existente] = {
+
+...inventario[existente],
+
+cantidad,
+
+categoria:
+categoria || "General",
+
+fecha:
+new Date().toLocaleDateString()
+
+};
+
+}else{
+
+inventario.push({
+
+nombre,
+
+cantidad,
+
+categoria:
+categoria || "General",
+
+fecha:
+new Date().toLocaleDateString()
+
+});
+
+}
+
+localStorage.setItem(
+"inventario",
+JSON.stringify(inventario)
+);
+
+document.getElementById("invNombre").value="";
+document.getElementById("invCantidad").value="";
+document.getElementById("invCategoria").value="";
+
+renderizarInventario();
+
+}
+
+function renderizarInventario(){
+
+const lista = document.getElementById("listaInventario");
+
+if(!lista)return;
+
+lista.innerHTML="";
+
+if(inventario.length===0){
+
+lista.innerHTML=`
+<div class="bg-gray-100 p-6 rounded-2xl text-center text-gray-500">
+Sin productos registrados
+</div>
+`;
+
+return;
+
+}
+
+const agrupado={};
+
+inventario.forEach((item,index)=>{
+
+if(!agrupado[item.fecha]){
+agrupado[item.fecha]=[];
+}
+
+agrupado[item.fecha].push({
+...item,
+index
+});
+
+});
+
+for(let fecha in agrupado){
+
+lista.innerHTML += `
+
+<details open class="bg-white rounded-3xl shadow-xl p-5">
+
+<summary class="text-2xl font-bold text-blue-700 cursor-pointer">
+
+📅 ${fecha}
+(${agrupado[fecha].length})
+
+</summary>
+
+<div class="space-y-4 mt-5">
+
+${agrupado[fecha].map(item=>`
+
+<details class="bg-blue-50 rounded-2xl p-4 card">
+
+<summary class="cursor-pointer flex justify-between items-center">
+
+<div>
+
+<h3 class="font-bold text-xl text-blue-700">
+
+📦 ${item.nombre}
+
+</h3>
+
+<p>
+
+📊 ${item.cantidad}
+
+</p>
+
+</div>
+
+</summary>
+
+<div class="mt-4 space-y-2">
+
+<p>
+🏷️ Categoría:
+<b>${item.categoria}</b>
+</p>
+
+<p>
+📅 Registro:
+${item.fecha}
+</p>
+
+<div class="flex gap-2 pt-3">
+
+<button
+onclick="editarInventario(${item.index})"
+class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-xl">
+
+✏️ Editar
+
+</button>
+
+<button
+onclick="eliminarInventario(${item.index})"
+class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl">
+
+🗑️ Eliminar
+
+</button>
+
+</div>
+
+</div>
+
+</details>
+
+`).join("")}
+
+</div>
+
+</details>
+
+`;
+
+}
+
+}
+
+function editarInventario(index){
+
+const item=inventario[index];
+
+const nombre=prompt(
+"Producto",
+item.nombre
+);
+
+if(nombre===null)return;
+
+const cantidad=prompt(
+"Cantidad",
+item.cantidad
+);
+
+if(cantidad===null)return;
+
+const categoria=prompt(
+"Categoría",
+item.categoria
+);
+
+if(categoria===null)return;
+
+inventario[index]={
+
+...item,
+
+nombre:nombre.trim(),
+
+cantidad:parseInt(cantidad)||0,
+
+categoria:categoria.trim(),
+
+};
+
+localStorage.setItem(
+"inventario",
+JSON.stringify(inventario)
+);
+
+renderizarInventario();
+
+}
+
+function eliminarInventario(index){
+
+if(
+!confirm("¿Eliminar producto?")
+)return;
+
+inventario.splice(index,1);
+
+localStorage.setItem(
+"inventario",
+JSON.stringify(inventario)
+);
+
+renderizarInventario();
+
+}
+
+function toggleMenu(){
+
+const sidebar =
+document.querySelector("aside");
+
+const main =
+document.querySelector("main");
+
+if(window.innerWidth<=900){
+
+sidebar.classList.toggle("abierto");
+
+return;
+
+}
+
+sidebar.classList.toggle("cerrado");
+
+main.classList.toggle("expandido");
+
+}
+
+
+
+renderizar();
+renderizarActividades();
+renderizarInventario();
+cargarListaPlantas();
+</script>
+
+
+</body>
+</html>
